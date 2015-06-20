@@ -9,8 +9,11 @@ TIS100::Node.new do
   sub 100, acc
   add 1000, acc
   state
-  swp
+  neg
   state
-  sav
-  state
+  # state
+  # swp
+  # state
+  # sav
+  # state
 end

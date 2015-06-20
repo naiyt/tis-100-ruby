@@ -27,6 +27,7 @@ module TIS100
     end
 
     def neg
+      @acc.val = -1 * @acc.val
     end
 
     def jmp
