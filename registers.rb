@@ -36,6 +36,14 @@ module TIS100
       super
     end
 
+    def swp(register)
+      register.val, @val = @val, register.val
+    end
+
+    def sav(register)
+      @val = register.val
+    end
+
     def val=(new_val)
       raise WRITE_EXCEPTION
     end

@@ -9,9 +9,11 @@ module TIS100
     end
 
     def swp
+      @bak.swp(@acc)
     end
 
     def sav
+      @bak.sav(@acc)
     end
 
     def add(val, dest)

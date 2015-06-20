@@ -30,5 +30,10 @@ module TIS100
     def debug(state=false)
       @debugging = state
     end
+
+    def state
+      puts "ACC: #{acc.val}"
+      puts "BAK: #{bak.val}"
+    end
   end
 end
