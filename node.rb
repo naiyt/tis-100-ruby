@@ -8,8 +8,9 @@ module TIS100
 
   class Node
     include Instructions
+    attr_accessor :acc, :bak, :nil, :left, :right, :up, :down
 
-    def initialize
+    def initialize(&block)
       # Registers
       @acc   =  Acc.new
       @bak   =  Bak.new
@@ -20,6 +21,14 @@ module TIS100
       @right =  Port.new
       @up    =  Port.new
       @down  =  Port.new
+
+      @debugging = false
+
+      instance_eval(&block)
+    end
+
+    def debug(state=false)
+      @debugging = state
     end
   end
 end

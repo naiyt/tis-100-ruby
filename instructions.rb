@@ -3,7 +3,11 @@ module TIS100
     def nop
     end
 
-    def mov
+    def mov(val, to)
+      to.val = val
+      if @debugging
+        puts "#{to.name}: #{to.val}"
+      end
     end
 
     def swp
