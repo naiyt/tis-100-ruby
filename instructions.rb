@@ -3,11 +3,9 @@ module TIS100
     def nop
     end
 
-    def mov(val, to)
-      to.val = val
-      if @debugging
-        puts "#{to.name}: #{to.val}"
-      end
+    def mov(val, dest)
+      dest.val = val
+      puts debug_message(dest) if @debugging
     end
 
     def swp
@@ -16,10 +14,14 @@ module TIS100
     def sav
     end
 
-    def add
+    def add(val, dest)
+      dest + val
+      puts debug_message(dest) if @debugging
     end
 
-    def sub
+    def sub(val, dest)
+      dest - val
+      puts debug_message(dest) if @debugging
     end
 
     def neg
@@ -41,6 +43,10 @@ module TIS100
     end
 
     def jro
+    end
+
+    def debug_message(dest)
+      print "#{dest.name}: #{dest.val}"
     end
   end
 end

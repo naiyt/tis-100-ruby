@@ -16,18 +16,36 @@ module TIS100
       @val = new_val
     end
 
+    def +(val)
+      @val += val
+    end
+
+    def -(val)
+      @val -= val
+    end
+
     def name
       'ACC'
     end
   end
 
   class Bak < Register
+    WRITE_EXCEPTION = "Cannot read or write to BAK. Use SAV or SWP instead"
+
     def initialize
       super
     end
 
     def val=(new_val)
-      raise "Cannot read or write to BAK. Use SAVE or SWP instead."
+      raise WRITE_EXCEPTION
+    end
+
+    def +(val)
+      raise WRITE_EXCEPTION
+    end
+
+    def -(val)
+      raise WRITE_EXCEPTION
     end
 
     def name
