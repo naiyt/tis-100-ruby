@@ -1,0 +1,42 @@
+grammar Tis
+
+  rule expression
+    space? body space?
+  end
+
+  rule body
+    (label / instruction)+
+  end
+
+  rule label
+    [a-zA-Z]+ ':' space?
+  end
+
+  rule space
+    [\s]+
+  end
+
+  rule instruction
+    mov / add / sub
+  end
+
+  rule integer
+    ('+' / '-')? [0-9]+
+  end
+
+  rule mov
+    'MOV' space (port / integer) space (port / 'ACC')
+  end
+
+  rule add
+    'ADD' space (integer / port)
+  end
+
+  rule sub
+    'SUB' space (integer / port)
+  end
+
+  rule port
+    'UP' / 'DOWN' / 'LEFT' / 'RIGHT' / 'LAST' / 'ANY'
+  end
+end

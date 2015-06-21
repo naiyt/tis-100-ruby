@@ -24,7 +24,7 @@ module TIS100
 
       @debugging = false
 
-      instance_eval(&block)
+      instance_eval(&block) if block_given?
     end
 
     def debug(state=false)
@@ -34,6 +34,22 @@ module TIS100
     def state
       puts "ACC: #{acc.val}"
       puts "BAK: #{bak.val}"
+    end
+
+    private
+
+    def method_missing(method_sym, &block)
+      add_label(method_sym, block)
+      if block_given?
+        yield
+      else
+        @labels[method_sym].call
+      end
+    end
+
+    def add_label(label_name, block)
+      @labels ||= {}
+      @labels[label_name] = block
     end
   end
 end

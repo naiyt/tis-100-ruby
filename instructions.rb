@@ -30,7 +30,8 @@ module TIS100
       @acc.val = -1 * @acc.val
     end
 
-    def jmp
+    def jmp(label_name, &block)
+      @labels[label_name].call
     end
 
     def jez
