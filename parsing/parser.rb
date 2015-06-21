@@ -29,4 +29,14 @@ class Parser
 
 end
 
-puts Parser.parse("START: MOV LEFT UP")
+test = <<-EOS
+START:
+  MOV 10 ACC
+  MOV UP ACC
+  JMP START
+  JEZ END
+END:
+  MOV 10 DOWN
+EOS
+
+puts Parser.parse(test)

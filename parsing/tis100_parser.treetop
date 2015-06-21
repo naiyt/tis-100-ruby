@@ -1,5 +1,4 @@
 grammar Tis
-
   rule expression
     space? body space?
   end
@@ -9,19 +8,11 @@ grammar Tis
   end
 
   rule label
-    [a-zA-Z]+ ':' space?
-  end
-
-  rule space
-    [\s]+
+    word ':' space?
   end
 
   rule instruction
-    mov / add / sub
-  end
-
-  rule integer
-    ('+' / '-')? [0-9]+
+    (mov / add / sub / jump / jro / 'SWP' / 'SAV'/ 'NEG' / 'NOP') space?
   end
 
   rule mov
@@ -36,7 +27,29 @@ grammar Tis
     'SUB' space (integer / port)
   end
 
+  rule jump
+    ('JMP' / 'JEZ' / 'JNZ' / 'JGZ' / 'JLZ') space word
+  end
+
+  rule jro
+    'JRO' space (integer / port)
+  end
+
   rule port
     'UP' / 'DOWN' / 'LEFT' / 'RIGHT' / 'LAST' / 'ANY'
+  end
+
+  # Helper rules
+
+  rule word
+    [a-zA-Z]+
+  end
+
+  rule integer
+    ('+' / '-')? [0-9]+
+  end
+
+  rule space
+    [\s]+
   end
 end
