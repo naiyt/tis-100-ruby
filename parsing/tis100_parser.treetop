@@ -1,42 +1,42 @@
 grammar Tis
   rule expression
-    space? body space?
+    space? body space? <Expression>
   end
 
   rule body
-    (label / instruction)+
+    (label / instruction)+ <Body>
   end
 
   rule label
-    word ':' space?
+    word ':' space? <Identifier>
   end
 
   rule instruction
-    (mov / add / sub / jump / jro / 'SWP' / 'SAV'/ 'NEG' / 'NOP') space?
+    (mov / add / sub / jump / jro / 'SWP' / 'SAV'/ 'NEG' / 'NOP') space? <Instruction>
   end
 
   rule mov
-    'MOV' space (port / integer / 'ACC') space (port / 'ACC')
+    'MOV' space (port / integer / 'ACC') space (port / 'ACC') <Instruction>
   end
 
   rule add
-    'ADD' space (integer / port / 'ACC')
+    'ADD' space (integer / port / 'ACC') <Instruction>
   end
 
   rule sub
-    'SUB' space (integer / port / 'ACC')
+    'SUB' space (integer / port / 'ACC') <Instruction>
   end
 
   rule jump
-    ('JMP' / 'JEZ' / 'JNZ' / 'JGZ' / 'JLZ') space word
+    ('JMP' / 'JEZ' / 'JNZ' / 'JGZ' / 'JLZ') space word <Instruction>
   end
 
   rule jro
-    'JRO' space (integer / port)
+    'JRO' space (integer / port) <Instruction>
   end
 
   rule port
-    'UP' / 'DOWN' / 'LEFT' / 'RIGHT' / 'LAST' / 'ANY'
+    'UP' / 'DOWN' / 'LEFT' / 'RIGHT' / 'LAST' / 'ANY' <Identifier>
   end
 
   # Helper rules
@@ -46,7 +46,7 @@ grammar Tis
   end
 
   rule integer
-    ('+' / '-')? [0-9]+
+    ('+' / '-')? [0-9]+ <IntegerLiteral>
   end
 
   rule space

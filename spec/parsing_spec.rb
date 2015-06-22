@@ -58,6 +58,7 @@ describe 'TIS100 parsing' do
           JRO -1
           JNZ FINISH
       EOS
+      Parser.parse(program)
       expect(valid?(program)).to be_truthy
     end
   end

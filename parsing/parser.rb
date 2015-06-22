@@ -1,5 +1,6 @@
 require 'treetop'
 require_relative 'node_extensions.rb'
+require 'pry'
 
 # http://thingsaaronmade.com/blog/a-quick-intro-to-writing-a-parser-using-treetop.html
 
@@ -16,7 +17,8 @@ class Parser
     raise ParseError, "Parse error at offset: #{@@parser.index}" if tree.nil?
 
     self.clean_tree(tree)
-    tree
+    tree.to_array
+    binding.pry
   end
 
   private
@@ -28,15 +30,3 @@ class Parser
   end
 
 end
-
-# test = <<-EOS
-# START:
-#   MOV 10 ACC
-#   MOV UP ACC
-#   JMP START
-#   JEZ END
-# END:
-#   MOV 10 DOWN
-# EOS
-#
-# puts Parser.parse(test)
