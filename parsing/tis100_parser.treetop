@@ -16,15 +16,15 @@ grammar Tis
   end
 
   rule mov
-    'MOV' space (port / integer) space (port / 'ACC')
+    'MOV' space (port / integer / 'ACC') space (port / 'ACC')
   end
 
   rule add
-    'ADD' space (integer / port)
+    'ADD' space (integer / port / 'ACC')
   end
 
   rule sub
-    'SUB' space (integer / port)
+    'SUB' space (integer / port / 'ACC')
   end
 
   rule jump

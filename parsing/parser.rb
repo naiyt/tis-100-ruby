@@ -3,17 +3,17 @@ require_relative 'node_extensions.rb'
 
 # http://thingsaaronmade.com/blog/a-quick-intro-to-writing-a-parser-using-treetop.html
 
+class ParseError < StandardError
+end
+
 class Parser
   Treetop.load(File.expand_path(File.join(File.dirname(__FILE__), 'tis100_parser.treetop')))
   @@parser = TisParser.new
 
   def self.parse(data)
-
     tree = @@parser.parse(data)
 
-    if(tree.nil?)
-      raise Exception, "Parse error at offset: #{@@parser.index}"
-    end
+    raise ParseError, "Parse error at offset: #{@@parser.index}" if tree.nil?
 
     self.clean_tree(tree)
     tree
@@ -29,14 +29,14 @@ class Parser
 
 end
 
-test = <<-EOS
-START:
-  MOV 10 ACC
-  MOV UP ACC
-  JMP START
-  JEZ END
-END:
-  MOV 10 DOWN
-EOS
-
-puts Parser.parse(test)
+# test = <<-EOS
+# START:
+#   MOV 10 ACC
+#   MOV UP ACC
+#   JMP START
+#   JEZ END
+# END:
+#   MOV 10 DOWN
+# EOS
+#
+# puts Parser.parse(test)
