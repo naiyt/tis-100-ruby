@@ -8,7 +8,7 @@ grammar Tis
   end
 
   rule label
-    word ':' space? <Identifier>
+    word ':' space? <Label>
   end
 
   rule instruction

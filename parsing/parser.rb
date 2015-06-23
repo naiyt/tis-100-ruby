@@ -17,15 +17,15 @@ class Parser
     raise ParseError, "Parse error at offset: #{@@parser.index}" if tree.nil?
 
     self.clean_tree(tree)
-    tree.to_array
     binding.pry
+    tree.to_array
   end
 
   private
 
   def self.clean_tree(root_node)
     return if(root_node.elements.nil?)
-    root_node.elements.delete_if{|node| node.class.name == "Treetop::Runtime::SyntaxNode" }
+    root_node.elements.delete_if {|node| node.class.name == "Treetop::Runtime::SyntaxNode" }
     root_node.elements.each {|node| self.clean_tree(node) }
   end
 

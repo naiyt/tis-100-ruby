@@ -31,9 +31,30 @@ module Tis
     end
   end
 
+  class Label < Treetop::Runtime::SyntaxNode
+    def to_array
+      {:label => text_value.strip }
+    end
+  end
+
   class Instruction < Treetop::Runtime::SyntaxNode
     def to_array
-      text_value.strip
+      args = text_value.strip.split("\s")
+      args.map do |arg|
+        if is_num?(arg)
+          Integer(arg) 
+        else
+          arg
+        end
+      end
     end
+  end
+end
+
+def is_num?(str)
+  begin
+    !!Integer(str)
+  rescue ArgumentError, TypeError
+    false
   end
 end
